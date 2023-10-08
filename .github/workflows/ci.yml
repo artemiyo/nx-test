@@ -1,18 +1,30 @@
-name: Test CI
+name: CD
 
 on:
-  push
+  pull_request:
+    paths-ignore:
+      - '**.md'
+    types:
+      - closed
+    branches:
+      - main
 
 jobs:
-  main:
-    if: github.event.pull_request.merged == false
+  build-and-deploy:
+    if: github.event.pull_request.merged == true
     permissions: write-all
     runs-on: ubuntu-latest
-    concurrency: ci-${{github.ref}}
+    concurrency: ci-${{ github.ref }}
     steps:
-      - name: Checkout 🛎
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - uses: nrwl/nx-set-shas@v3
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: npx nx affected -t build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
