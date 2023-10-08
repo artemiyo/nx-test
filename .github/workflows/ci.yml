@@ -13,7 +13,6 @@ on:
 
 jobs:
   build-and-deploy:
-    if: github.event.pull_request.merged == true
     permissions: write-all
     runs-on: ubuntu-latest
     concurrency: ci-${{ github.ref }}
