@@ -24,8 +24,8 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: npx nx -t acme build
+        run: npx nx build -t acme
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
+          folder: dist
