@@ -1,8 +1,4 @@
 {
-  "name": "acme",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/acme/src",
-  "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -36,37 +32,6 @@
           "hmr": false
         }
       }
-    },
-    "preview": {
-      "executor": "@nx/vite:preview-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "acme:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "acme:build:development"
-        },
-        "production": {
-          "buildTarget": "acme:build:production"
-        }
-      }
-    },
-    "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
-      "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/acme"
-      }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/acme/**/*.{ts,tsx,js,jsx}"]
-      }
     }
-  },
-  "tags": []
+  }
 }
